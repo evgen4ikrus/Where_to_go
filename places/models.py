@@ -13,3 +13,16 @@ class Place(models.Model):
     class Meta:
         verbose_name = 'Место отдыха'
         verbose_name_plural = 'Места отдыха'
+
+
+class Image(models.Model):
+    number = models.IntegerField('Порядковый номер')
+    place = models.ForeignKey('Place', on_delete=models.CASCADE,)
+    image = models.ImageField(upload_to='images/',)
+
+    def __str__(self):
+            return f'{self.number} {self.place}'
+
+    class Meta:
+        verbose_name = 'Фотография'
+        verbose_name_plural = 'Фотографии'
