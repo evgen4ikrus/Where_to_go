@@ -23,7 +23,7 @@ class Image(models.Model):
         verbose_name='Место оьдых',
         related_name='images'
     )
-    image = models.ImageField(upload_to='images/',)
+    image = models.ImageField('Картинка', upload_to='images/')
 
     def __str__(self):
             return f'{self.number} {self.place}'
