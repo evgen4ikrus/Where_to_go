@@ -4,6 +4,8 @@ from .models import Place, Image
 
 class ImageInline(admin.TabularInline):
     model = Image
+    readonly_fields = ('get_preview',)
+    fields = ('image', 'get_preview', 'number')
 
 
 @admin.register(Place)
