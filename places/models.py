@@ -31,7 +31,7 @@ class Image(models.Model):
     def get_preview(self):
         return format_html(
             '<img src="{url}" style="max-height:200px"/>',
-            url = self.image.url,
+            url=self.image.url,
         )
 
     def __str__(self):

@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from places.models import Place, Image
-from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+
+from places.models import Image, Place
 
 
 def index(request):
@@ -44,6 +44,7 @@ def place_detail_view(request, place_id):
         "coordinates": {
             "lng": place.lng,
             "lat": place.lat
+        }
     }
-}
-    return JsonResponse(place_details,  json_dumps_params={'ensure_ascii': False, 'indent': 2})
+    return JsonResponse(place_details,
+                        json_dumps_params={'ensure_ascii': False, 'indent': 2})
