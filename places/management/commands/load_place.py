@@ -1,15 +1,17 @@
-from django.core.management.base import BaseCommand
-import requests
-from places.models import Place, Image
 from urllib.parse import urlparse
+
+import requests
 from django.core.files.base import ContentFile
+from django.core.management.base import BaseCommand
+
+from places.models import Image, Place
 
 
 class Command(BaseCommand):
-    help = 'Load new place'    
+    help = 'Load new place'
 
     def handle(self, *args, **options):
-        
+
         json_url = options['json_url']
         response = requests.get(json_url)
         response.raise_for_status()
@@ -17,7 +19,7 @@ class Command(BaseCommand):
 
         place, created = Place.objects.get_or_create(
             title=place_raw['title'],
-            defaults = {
+            defaults={
                 'description_short': place_raw['description_short'],
                 'description_long': place_raw['description_long'],
                 'lat': place_raw['coordinates']['lat'],
