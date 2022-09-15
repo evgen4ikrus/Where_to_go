@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from places.models import Image, Place
+from places.models import Place
 
 
 def index(request):
@@ -47,4 +47,4 @@ def place_detail_view(request, place_id):
         }
     }
     return JsonResponse(place_details,
-                        json_dumps_params={'ensure_ascii': False, 'indent': 2})
+                        json_dumps_params={'ensure_ascii': False})
