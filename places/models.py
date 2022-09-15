@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.html import format_html
 from tinymce.models import HTMLField
 
 
@@ -27,12 +26,6 @@ class Image(models.Model):
         related_name='images'
     )
     image = models.ImageField('Картинка', upload_to='images/')
-
-    def get_preview(self):
-        return format_html(
-            '<img src="{url}" style="max-height:200px"/>',
-            url=self.image.url,
-        )
 
     def __str__(self):
             return f'{self.number} {self.place.title}'
