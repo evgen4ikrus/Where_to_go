@@ -3,7 +3,7 @@
 
 Проект доступен по [ссылке](https://shesterikov3.pythonanywhere.com/).
 
-Панель администратора можно протестировать по [ссылке](https://shesterikov3.pythonanywhere.com/admin). Логин: admin, пароль: 12345.
+Панель администратора можно протестировать по [ссылке](https://shesterikov3.pythonanywhere.com/admin).
 ## Установка и запуск
 * Скачайте код
 * Установите зависимости:
