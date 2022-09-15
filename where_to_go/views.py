@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from places.models import Place
 
+
 def get_place_detail(place):
     place_detail = {
         "type": "Feature",

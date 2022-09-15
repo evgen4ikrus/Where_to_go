@@ -18,6 +18,7 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     get_preview.short_description = 'Превью'
 
+
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     inlines = [

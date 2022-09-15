@@ -10,7 +10,7 @@ class Place(models.Model):
     lat = models.FloatField('Широта')
 
     def __str__(self):
-            return self.title
+        return self.title
 
     class Meta:
         verbose_name = 'Место отдыха'
@@ -28,7 +28,7 @@ class Image(models.Model):
     image = models.ImageField('Картинка', upload_to='images/')
 
     def __str__(self):
-            return f'{self.number} {self.place.title}'
+        return f'{self.number} {self.place.title}'
 
     class Meta:
         verbose_name = 'Фотография'
