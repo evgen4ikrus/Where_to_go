@@ -4,32 +4,29 @@ from django.urls import reverse
 
 from places.models import Place
 
+def get_place_detail(place):
+    place_detail = {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [place.lng, place.lat]
+        },
+        "properties": {
+            "title": place.title,
+            "placeId": place.id,
+            "detailsUrl": reverse('place_detail', args=[place.id])
+        }
+    }
+    return place_detail
+
 
 def index(request):
     places = Place.objects.all()
-    places_points = []
-
-    for place in places:
-        places_points.append(
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [place.lng, place.lat]
-                },
-                "properties": {
-                    "title": place.title,
-                    "placeId": place.id,
-                    "detailsUrl": reverse('place_detail', args=[place.id])
-                }
-            }
-        )
-
+    places_points = [get_place_detail(place) for place in places]
     features = {
         "type": "FeatureCollection",
         "features": places_points,
     }
-
     return render(request, 'index.html', context=features)
 
 
