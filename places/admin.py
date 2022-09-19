@@ -12,9 +12,9 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     readonly_fields = ('get_preview',)
     ordering = ('number', )
 
-    def get_preview(self, object):
-        if object.image:
-            return format_html(f'<img src="{object.image.url}" height="200px" />')
+    def get_preview(self, obj):
+        if obj.image:
+            return format_html(f'<img src="{obj.image.url}" height="200px" />')
 
     get_preview.short_description = 'Превью'
 
