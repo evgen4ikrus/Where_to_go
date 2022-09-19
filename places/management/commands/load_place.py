@@ -1,3 +1,4 @@
+from email.mime import image
 from urllib.parse import urlparse
 
 import requests
@@ -28,14 +29,12 @@ class Command(BaseCommand):
         )
 
         for number, img_url in enumerate(place_raw['imgs']):
-            place_img = Image.objects.create(number=number, place=place)
-            name = urlparse(img_url).path.split('/')[-1]
-
             response = requests.get(img_url)
             response.raise_for_status()
-            image_content = ContentFile(response.content)
-
-            place_img.image.save(name, image_content, save=True)
+            name = urlparse(img_url).path.split('/')[-1]
+            image_content = ContentFile(response.content, name=name)
+            Image.objects.create(number=number,
+                                 place=place, image=image_content)
 
     def add_arguments(self, parser):
         parser.add_argument('json_url', type=str)
