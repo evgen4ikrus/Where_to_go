@@ -1,6 +1,4 @@
-from email.mime import image
-from urllib.parse import urlparse
-
+import os
 import requests
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
@@ -31,7 +29,7 @@ class Command(BaseCommand):
         for number, img_url in enumerate(place_raw['imgs']):
             response = requests.get(img_url)
             response.raise_for_status()
-            name = urlparse(img_url).path.split('/')[-1]
+            name = os.path.split(img_url)[1]
             image_content = ContentFile(response.content, name=name)
             Image.objects.create(number=number,
                                  place=place, image=image_content)
