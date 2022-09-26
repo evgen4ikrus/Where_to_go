@@ -5,6 +5,7 @@ from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 
 from places.models import Image, Place
+from urllib.parse import urlparse
 
 
 class Command(BaseCommand):
@@ -29,7 +30,7 @@ class Command(BaseCommand):
         for number, img_url in enumerate(place_raw['imgs']):
             response = requests.get(img_url)
             response.raise_for_status()
-            name = os.path.split(img_url)[1]
+            name = os.path.split(urlparse(img_url).path)[1]
             image_content = ContentFile(response.content, name=name)
             Image.objects.create(number=number,
                                  place=place, image=image_content)
