@@ -27,13 +27,14 @@ class Command(BaseCommand):
             }
         )
 
-        for number, img_url in enumerate(place_raw['imgs']):
-            response = requests.get(img_url)
-            response.raise_for_status()
-            name = os.path.split(urlparse(img_url).path)[1]
-            image_content = ContentFile(response.content, name=name)
-            Image.objects.create(number=number,
-                                 place=place, image=image_content)
+        if created:
+            for number, img_url in enumerate(place_raw['imgs']):
+                response = requests.get(img_url)
+                response.raise_for_status()
+                name = os.path.split(urlparse(img_url).path)[1]
+                image_content = ContentFile(response.content, name=name)
+                Image.objects.create(number=number,
+                                    place=place, image=image_content)
 
     def add_arguments(self, parser):
         parser.add_argument('json_url', type=str)
